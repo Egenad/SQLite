@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_create_backup"
+        android:title="Create BackUp"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_restore_backup"
+        android:title="Restore BackUp"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_manage_users"
+        android:title="Manage Users"
+        app:showAsAction="never" />
+</menu>
