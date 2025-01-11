@@ -25,6 +25,7 @@ class UsersContentProvider : ContentProvider() {
     private lateinit var dbHelper: SQLManager
 
     override fun onCreate(): Boolean {
+        dbHelper = SQLManager(context!!)
         return true
     }
 

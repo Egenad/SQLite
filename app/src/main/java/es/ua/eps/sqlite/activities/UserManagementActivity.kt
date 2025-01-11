@@ -72,15 +72,15 @@ class UserManagementActivity : AppCompatActivity() {
                 builder.setPositiveButton("OK") { _, _ ->
 
                     // ---- SQLiteOpenHelper ----
-                    //val sqlMan = SQLManager.getInstance(this)
-                    //val user = sqlMan.getUserByUsername(selectedUser)
+                    val sqlMan = SQLManager.getInstance(this)
+                    val user = sqlMan.getUserByUsername(selectedUser)
 
                     // ---- Room ----
-                    val user = AppDatabase.getDatabase(this).userDao().getUserByUsername(selectedUser)
+                    //val user = AppDatabase.getDatabase(this).userDao().getUserByUsername(selectedUser)
 
                     if(user != null) {
-                        //val success = sqlMan.deleteUser(user.id) // ---- SQLiteOpenHelper ----
-                        val success = AppDatabase.getDatabase(this).userDao().deleteUser(user) // ---- Room ----
+                        val success = sqlMan.deleteUser(user.id) // ---- SQLiteOpenHelper ----
+                        //val success = AppDatabase.getDatabase(this).userDao().deleteUser(user) // ---- Room ----
                         if (success > 0) {
                             Toast.makeText(
                                 this,

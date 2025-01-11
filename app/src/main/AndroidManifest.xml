@@ -2,10 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.READ_USER_DICTIONARY" />
-    <uses-permission android:name="android.permission.WRITE_USER_DICTIONARY" />
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
-    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+    <permission android:name="es.ua.eps.PERMISSION"/>
 
     <application
         android:allowBackup="true"
@@ -42,10 +39,11 @@
             </intent-filter>
         </activity>
         <provider
-            android:readPermission="es.ua.eps.READ_PERMISSION"
-            android:writePermission="es.ua.eps.WRITE_PERMISSION"
             android:permission="es.ua.eps.PERMISSION"
             android:grantUriPermissions="true"
+            android:enabled="true"
+            android:exported="true"
+            android:multiprocess="true"
             android:authorities="es.ua.eps.usersprovider"
             android:name=".providers.UsersContentProvider" />
     </application>
