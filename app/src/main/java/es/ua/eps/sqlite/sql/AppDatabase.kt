@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room.databaseBuilder
 import androidx.room.RoomDatabase
 
-const val ROOM_DB_NAME = "room_sqlite"
+const val ROOM_DB_NAME = "atm_sqlite"
 
 @Database(entities = [UserEntity::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {

@@ -21,11 +21,11 @@ class SQLManager (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, n
 
         const val DATABASE_NAME = "atm_sqlite.db"
         const val DATABASE_VERSION = 1
-        const val TABLE_NAME = "Usuarios"
-        const val COLUMN_ID = "ID"
-        const val COLUMN_USERNAME = "nombre_usuario"
+        const val TABLE_NAME = "users"
+        const val COLUMN_ID = "_ID"
+        const val COLUMN_USERNAME = "username"
         const val COLUMN_PASSWORD = "password"
-        const val COLUMN_FULLNAME = "nombre_completo"
+        const val COLUMN_FULLNAME = "fullName"
         const val COLUMN_EMAIL = "email"
 
         @Synchronized

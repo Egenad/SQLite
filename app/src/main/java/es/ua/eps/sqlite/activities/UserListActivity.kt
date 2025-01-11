@@ -42,10 +42,10 @@ class UserListActivity : AppCompatActivity() {
     private fun createRecycledView(){
 
         // ---- SQLiteOpenHelper ----
-        //val userList = SQLManager.getInstance(this).getAllUsers()
+        val userList = SQLManager.getInstance(this).getAllUsers()
 
         // ---- Room ----
-        val userList = AppDatabase.getDatabase(this).userDao().getAllUsers()
+        //val userList = AppDatabase.getDatabase(this).userDao().getAllUsers()
 
         binding = ActivityUserListBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -54,10 +54,10 @@ class UserListActivity : AppCompatActivity() {
         binding.recyclerView.itemAnimator = DefaultItemAnimator()
 
         // ---- SQLiteOpenHelper ----
-        //val recyclerAdapter = UserAdapter(userList)
+        val recyclerAdapter = UserAdapter(userList)
 
         // ---- Room ----
-        val recyclerAdapter = UserAdapterRoom(userList)
+        //val recyclerAdapter = UserAdapterRoom(userList)
 
         binding.recyclerView.adapter = recyclerAdapter
     }

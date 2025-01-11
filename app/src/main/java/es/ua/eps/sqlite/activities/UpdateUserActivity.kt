@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import es.ua.eps.sqlite.R
 import es.ua.eps.sqlite.databinding.ActivityUpdateUserBinding
 import es.ua.eps.sqlite.sql.AppDatabase
+import es.ua.eps.sqlite.sql.SQLManager
 
 class UpdateUserActivity : AppCompatActivity() {
 
@@ -42,15 +43,15 @@ class UpdateUserActivity : AppCompatActivity() {
         if(selectedUser >= 0) {
 
             // ---- SQLiteOpenHelper ----
-            //val user = SQLManager.getInstance(this).getUserById(selectedUser)
+            val user = SQLManager.getInstance(this).getUserById(selectedUser)
 
             // ---- Room ----
-            val user = AppDatabase.getDatabase(this).userDao().getUserById(selectedUser)
+            //val user = AppDatabase.getDatabase(this).userDao().getUserById(selectedUser)
 
             if(user != null) {
-                binding.loginEditText.setText(user.nombre_usuario)
+                binding.loginEditText.setText(user.username)
                 binding.passwordEditText.setText(user.password)
-                binding.usernameEditText.setText(user.nombre_completo)
+                binding.usernameEditText.setText(user.fullName)
                 binding.emailEditText.setText(user.email)
             }
         }else{
@@ -67,17 +68,17 @@ class UpdateUserActivity : AppCompatActivity() {
                     if(android.util.Patterns.EMAIL_ADDRESS.matcher(binding.emailEditText.text.toString()).matches()) {
 
                         // ---- SQLiteOpenHelper ----
-                        /*val sqlManager = SQLManager.getInstance(this)
+                        val sqlManager = SQLManager.getInstance(this)
                         sqlManager.updateUser(
                             selectedUser,
                             binding.loginEditText.text.toString(),
                             binding.passwordEditText.text.toString(),
                             binding.usernameEditText.text.toString(),
                             binding.emailEditText.text.toString()
-                        )*/
+                        )
 
                         // ---- Room ----
-                        AppDatabase.getDatabase(this).userDao().updateUser(
+                        /*AppDatabase.getDatabase(this).userDao().updateUser(
                             UserEntity(
                                 selectedUser,
                                 binding.loginEditText.text.toString(),
@@ -85,7 +86,7 @@ class UpdateUserActivity : AppCompatActivity() {
                                 binding.usernameEditText.text.toString(),
                                 binding.emailEditText.text.toString()
                             )
-                        )
+                        )*/
                         finish()
                     }else{
                         Toast.makeText(this, "Por favor, ingrese un correo electrónico válido.", Toast.LENGTH_SHORT).show()

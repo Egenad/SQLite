@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import es.ua.eps.sqlite.R
 import es.ua.eps.sqlite.databinding.ActivityNewUserBinding
 import es.ua.eps.sqlite.sql.AppDatabase
+import es.ua.eps.sqlite.sql.SQLManager
 
 class NewUserActivity : AppCompatActivity() {
 
@@ -73,18 +74,18 @@ class NewUserActivity : AppCompatActivity() {
             // Create user
 
             // ---- SQLiteOpenHelper ----
-            //val sqlManager = SQLManager.getInstance(this)
-            //sqlManager.insertUser(login, password, username, email)
+            val sqlManager = SQLManager.getInstance(this)
+            sqlManager.insertUser(login, password, username, email)
 
             // ---- Room ----
-            val db = AppDatabase.getDatabase(this)
-            val user = UserEntity(
-                nombre_usuario = login,
-                password = password,
-                nombre_completo = username,
-                email = email
-            )
-            db.userDao().insertUser(user)
+            //val db = AppDatabase.getDatabase(this)
+            //val user = UserEntity(
+            //    username = login,
+            //    password = password,
+            //    fullName = username,
+            //    email = email
+            //)
+            //db.userDao().insertUser(user)
 
             Toast.makeText(this, "Usuario creado exitosamente.", Toast.LENGTH_SHORT).show()
 

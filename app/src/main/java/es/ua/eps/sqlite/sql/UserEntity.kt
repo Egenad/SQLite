@@ -3,11 +3,11 @@ package es.ua.eps.sqlite.sql
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "Usuarios")
+@Entity(tableName = "users")
 data class UserEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val nombre_usuario: String,
+    val username: String,
     val password: String,
-    val nombre_completo: String,
+    val fullName: String,
     val email: String
 )

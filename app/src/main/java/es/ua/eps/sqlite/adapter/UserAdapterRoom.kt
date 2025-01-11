@@ -22,7 +22,7 @@ class UserAdapterRoom(private val userList: List<UserEntity>) : RecyclerView.Ada
 
     inner class UserViewHolder(private val binding: ListItemUserBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(user: UserEntity) {
-            binding.usernameTextView.text = user.nombre_usuario
+            binding.usernameTextView.text = user.username
             binding.emailTextView.text = user.email
         }
     }

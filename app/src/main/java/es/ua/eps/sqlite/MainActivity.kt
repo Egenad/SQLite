@@ -2,8 +2,6 @@ package es.ua.eps.sqlite
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Environment
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -14,11 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import es.ua.eps.sqlite.activities.UserDataActivity
 import es.ua.eps.sqlite.activities.UserManagementActivity
 import es.ua.eps.sqlite.databinding.ActivityMainBinding
-import es.ua.eps.sqlite.sql.AppDatabase
 import es.ua.eps.sqlite.sql.SQLManager
-import java.io.File
-import java.io.FileOutputStream
-import java.io.IOException
 
 const val LOGGED_USER_NAME = "loggedUserName"
 const val LOGGED_USER_FULL_NAME = "loggedUserFullName"
@@ -52,13 +46,13 @@ class MainActivity : AppCompatActivity() {
             if(binding.usernameEditText.text.isNotBlank() && binding.passwordEditText.text.isNotBlank()) {
 
                 // ---- SQLiteOpenHelper ----
-                //val sqlManager = SQLManager.getInstance(this)
+                val sqlManager = SQLManager.getInstance(this)
 
                 // Check if user exists
-                //val user = sqlManager.getUserByUsername(binding.usernameEditText.text.toString())
+                val user = sqlManager.getUserByUsername(binding.usernameEditText.text.toString())
 
                 // ---- Room ----
-                val user = AppDatabase.getDatabase(this).userDao().getUserByUsername(binding.usernameEditText.text.toString())
+                //val user = AppDatabase.getDatabase(this).userDao().getUserByUsername(binding.usernameEditText.text.toString())
 
                 if (user != null) {
 
@@ -68,8 +62,8 @@ class MainActivity : AppCompatActivity() {
                         val intent = Intent(this, UserDataActivity::class.java)
 
                         // Set logged user extra
-                        intent.putExtra(LOGGED_USER_NAME, user.nombre_usuario)
-                        intent.putExtra(LOGGED_USER_FULL_NAME, user.nombre_completo)
+                        intent.putExtra(LOGGED_USER_NAME, user.username)
+                        intent.putExtra(LOGGED_USER_FULL_NAME, user.fullName)
 
                         startActivity(intent)
                     }
@@ -90,15 +84,15 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_create_backup -> {
-                //if(SQLManager.getInstance(this).backupDatabase(this)) ---- SQLiteOpenHelper ----
-                if(SQLManager.getInstance(this).backupRoomDatabase(this))
+                if(SQLManager.getInstance(this).backupDatabase(this))
+                //if(SQLManager.getInstance(this).backupRoomDatabase(this))
                     Toast.makeText(this, "BackUp creado correctamente", Toast.LENGTH_SHORT).show()
                 else Toast.makeText(this, "Error al crear BackUp", Toast.LENGTH_SHORT).show()
                 true
             }
             R.id.action_restore_backup -> {
-                //if(SQLManager.getInstance(this).restoreDatabase(this)) ---- SQLiteOpenHelper ----
-                if(SQLManager.getInstance(this).restoreRoomDatabase(this))
+                if(SQLManager.getInstance(this).restoreDatabase(this))
+                //if(SQLManager.getInstance(this).restoreRoomDatabase(this))
                     Toast.makeText(this, "BackUp restaurado correctamente", Toast.LENGTH_SHORT).show()
                 else Toast.makeText(this, "Error al restaurar BackUp", Toast.LENGTH_SHORT).show()
                 true

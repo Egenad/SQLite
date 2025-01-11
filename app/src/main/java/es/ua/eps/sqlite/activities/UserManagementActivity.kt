@@ -15,14 +15,16 @@ import androidx.core.view.WindowInsetsCompat
 import es.ua.eps.sqlite.R
 import es.ua.eps.sqlite.databinding.ActivityUserManagementBinding
 import es.ua.eps.sqlite.sql.AppDatabase
+import es.ua.eps.sqlite.sql.SQLManager
+import es.ua.eps.sqlite.sql.User
 
 const val SELECTED_USER_ID = "selectedUserID"
 
 class UserManagementActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityUserManagementBinding
-    private var selectedUserEntity : UserEntity? = null
-    // private var selectedUserEntity : User? = null ---- SQLiteOpenHelper ----
+    //private var selectedUserEntity : UserEntity? = null
+     private var selectedUserEntity : User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,16 +119,16 @@ class UserManagementActivity : AppCompatActivity() {
 
     private fun configureSpinner() {
         // ---- SQLiteOpenHelper ----
-        //val userList = SQLManager.getInstance(this).getAllUsers()
+        val userList = SQLManager.getInstance(this).getAllUsers()
 
         // ---- Room ----
-        val userList = AppDatabase.getDatabase(this).userDao().getAllUsers()
+        //val userList = AppDatabase.getDatabase(this).userDao().getAllUsers()
 
         if (userList.isNotEmpty()) {
             val adapter = ArrayAdapter(
                 this,
                 android.R.layout.simple_spinner_item,
-                userList.map { it.nombre_usuario }
+                userList.map { it.username }
             )
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.userSpinner.adapter = adapter
